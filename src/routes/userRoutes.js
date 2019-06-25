@@ -1,22 +1,14 @@
-import mongoose from 'mongoose'
+import { getUsers, newUser, showUser, updateUser, deleteUser } from '../controllers/userController'
 
-const Schema = mongoose.Schema
+const routes = (app) => {
+    app.route('/users')
+        .get(getUsers)
+        .post(newUser)
 
-export const UserSchema = new Schema({
-    firstName: {
-        type: String,
-        required: 'Please enter a first name.'
-    },
-    lastName: {
-        type: String,
-        required: 'Please enter a last name.'
-    },
-    email: {
-        type: String,
-        required: 'Please enter an email address.'
-    },
-    startDate: {
-        type: Date,
-        required: 'Please enter a start date.'
-    },
-})
+    app.route('/users/:userId')
+        .get(showUser)
+        .put(updateUser)
+        .delete(deleteUser)
+}
+
+export default routes

@@ -2,6 +2,8 @@ import express from 'express'
 import mongoose, { mongo } from 'mongoose'
 import bodyParser from 'body-parser'
 import userRoutes from './src/routes/userRoutes'
+import progressRoutes from './src/routes/progressRoutes'
+import tasksRoutes from './src/routes/tasksRoutes'
 
 const app = express()
 const PORT = 3000
@@ -13,6 +15,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 userRoutes(app)
+progressRoutes(app)
+tasksRoutes(app)
 
 app.get('/', (req, res) => {
     res.send("Hello World")

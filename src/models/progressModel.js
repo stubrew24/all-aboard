@@ -4,11 +4,11 @@ const Schema = mongoose.Schema
 
 export const ProgressSchema = new Schema({
     userId: {
-        type: Number,
+        type: String,
         required: 'User required.'
     },
     taskId: {
-        type: Number,
+        type: String,
         required: 'Task required.'
     },
     dueDate: {

@@ -1,4 +1,4 @@
-import { getUsers, newUser, showUser, updateUser, deleteUser } from '../controllers/userController'
+const { getUsers, newUser, showUser, updateUser, deleteUser } = require('../controllers/userController')
 
 const routes = (app) => {
     app.route('/users')
@@ -11,4 +11,4 @@ const routes = (app) => {
         .delete(deleteUser)
 }
 
-export default routes
+module.exports = routes

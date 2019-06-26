@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import { TasksSchema } from '../models/tasksModel'
+const mongoose = require('mongoose')
+const { TasksSchema } = require('../models/tasksModel')
 
 const Task = mongoose.model('Task', TasksSchema)
 

@@ -1,4 +1,4 @@
-import { allProgress, addProgress, showProgress, updateProgress, deleteProgress } from "../controllers/progressController";
+const { allProgress, addProgress, showProgress, updateProgress, deleteProgress } = require('../controllers/progressController')
 
 const routes = (app) => {
     app.route('/progress')
@@ -11,4 +11,4 @@ const routes = (app) => {
         .delete(deleteProgress)
 }
 
-export default routes
+module.exports = routes

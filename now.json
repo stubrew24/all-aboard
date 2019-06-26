@@ -2,6 +2,12 @@
     "name": "onboarding-api",
     "version": 2,
     "builds": [
-        {"src": "*js", "use": "@now/node"}
+        {"src": "*js", "use": "@now/node-server"}
+    ],
+    "env": {
+        "MONGODB_URI": "mongodb+srv://onboarding:VWWcppQ4dKgh6Krl@cluster0-fwofd.mongodb.net/test?retryWrites=true&w=majority"
+    },
+    "routes": [
+      { "src": "/(.*)", "dest": "index.js"}
     ]
 }

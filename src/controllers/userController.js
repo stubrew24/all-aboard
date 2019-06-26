@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import { UserSchema } from '../models/userModel'
+const mongoose = require('mongoose')
+const { UserSchema } = require('../models/userModel')
 
 const User = mongoose.model('User', UserSchema)
 

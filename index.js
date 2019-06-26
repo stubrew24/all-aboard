@@ -1,25 +1,35 @@
-import express from 'express'
-import mongoose, { mongo } from 'mongoose'
-import bodyParser from 'body-parser'
-import userRoutes from './src/routes/userRoutes'
-import progressRoutes from './src/routes/progressRoutes'
-import tasksRoutes from './src/routes/tasksRoutes'
+if (!process.env.now) require("dotenv").config();
+const express = require('express')
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
+const userRoutes = require('./src/routes/userRoutes')
+const progressRoutes = require('./src/routes/progressRoutes')
+const tasksRoutes = require('./src/routes/tasksRoutes')
+const helmet = require('helmet')
+const cors = require('cors')
 
 const app = express()
-const PORT = 3000
+const port = process.env.now ? 8080 : 4000;
 
-mongoose.Promise = global.Promise
-mongoose.connect('mongodb+srv://onboarding:VWWcppQ4dKgh6Krl@cluster0-fwofd.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true})
+console.log(userRoutes)
 
+app.use(helmet())
+app.use(cors())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+
+mongoose.Promise = global.Promise
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/onboarding", {useNewUrlParser: true})
+    .then(() => console.log("Connected to mongoDB"))
+    .catch(err => console.log(err));
+
 
 userRoutes(app)
 progressRoutes(app)
 tasksRoutes(app)
 
 app.get('/', (req, res) => {
-    res.send("Hello World")
+    res.redirect("https://github.com/stubrew24/onboarding-api")
 })
 
-app.listen(PORT, console.log("Server running on port", PORT))
+app.listen(port);

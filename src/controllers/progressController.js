@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import { ProgressSchema } from '../models/progressModel'
+const mongoose = require('mongoose')
+const { ProgressSchema } = require('../models/progressModel')
 
 const Progress = mongoose.model('Progress', ProgressSchema)
 

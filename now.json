@@ -1,0 +1,7 @@
+{
+    "name": "onboarding-api",
+    "version": 2,
+    "builds": [
+        {"src": "*js", "use": "@now/node"}
+    ]
+}

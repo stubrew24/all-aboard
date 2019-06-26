@@ -9,7 +9,7 @@ const app = express()
 const PORT = 3000
 
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost/onboarding', {useNewUrlParser: true})
+mongoose.connect('mongodb+srv://onboarding:VWWcppQ4dKgh6Krl@cluster0-fwofd.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true})
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())

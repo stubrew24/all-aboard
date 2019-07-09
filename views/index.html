@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Onboarding Client</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./resources/styles.css" type="text/css" />
+    
+</head>
+<body>
+    <div class="container">
+        
+        <ul class="nav">
+            <div class="navbar-brand brand-title" href="#">All Aboard</div>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showOne('displayTasks')">Tasks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showOne('displayUsers')">Users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showOne('displayUserForm')">Add User</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="showOne('displayTaskForm')">Add Task</a>
+            </li>
+        </ul>
+
+        <div id="displayTasks" class="sections" style="display: none">
+            <h4>Tasks</h4>
+            <table id="tasksTable" class="table">
+                <tr class="thead-dark">
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Link</th>
+                    <th>Week Due</th>
+                    <th>Day Due</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </table>
+        </div>
+
+
+        <div id="displayUsers" class="sections" style="display: none">
+            <h4>Users</h4>
+            <table id="usersTable" class="table">
+                <tr class="thead-dark">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Start Date</th>
+                    <th>Actions</th>
+                    <th>Onboarding</th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="displayUserForm" class="sections" style="display: none">
+            <h4>Add User</h4>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-6">
+                    <form id="userForm" class="form-group">
+                        <input type="hidden" name="formtype" value="new" />
+                        <input type="text" name="firstName" class="form-control" placeholder="First Name" required /><br />
+                        <input type="text" name="lastName" class="form-control" placeholder="Last Name" required /><br />
+                        <input type="email" name="email" class="form-control" placeholder="Email" required /><br />
+                        <label for="startDate">Start Date</label>
+                        <input type="date" name="startDate" class="form-control" placeholder="Start Date" required /><br />
+
+                        <input type="submit" name="submit" value="Add User" class="btn btn-sm btn-info" />
+                    </form>
+                </div>
+                <div class="col"></div>
+            </div> 
+        </div>
+
+        <div id="displayTaskForm" class="sections" style="display: none">
+            <h4>Add Task</h4>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-6">
+                    <form id="taskForm" class="form-group">
+                        <input type="hidden" name="formtype" value="new" />
+
+                        <input type="text" name="name" class="form-control" placeholder="Task Name" required /><br />
+                        <input type="text" name="description" class="form-control" placeholder="Description" required /><br />
+                        <input type="text" name="link" class="form-control" placeholder="Link" /><br />
+                        <input type="number" name="dayDue" class="form-control" placeholder="Day Due" required /><br />
+                        <input type="number" name="weekDue" class="form-control" placeholder="Week Due" required /><br />
+
+                        <input type="submit" name="submit" value="Add Task" class="btn btn-sm btn-info" />
+                    </form>
+                </div>
+                <div class="col"></div>
+            </div> 
+        </div>
+
+        <div id="displayUserProgress" class="sections" style="display: none">
+            <h4 id="userName"></h4>
+            <div id="userProgress">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Task</th>
+                            <th>Due Date</th>
+                            <th>Complete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="progressTable">
+                        <tr><td>&nbsp;</td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="./src/api.js"></script>
+    <script src="./src/users.js"></script>
+    <script src="./src/tasks.js"></script>
+    <script src="./src/progress.js"></script>
+    <script src="./src/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Literata:600&display=swap');
+
+.active{
+    width: 32px;
+    height: 32px;
+    background-color: rgb(80,160,80);
+    border-radius: 4px;
+}
+
+.inactive{
+    width: 32px;
+    height: 32px;
+    background-color: rgb(200,70,70);
+    border-radius: 4px;
+}
+
+.brand-title{
+    font-family: 'Literata', sans-serif;
+    font-size: 1.5em;
+    color: #fff;
+    padding-right: 2em
+}
+
+.nav{
+    background-color: rgb(53,58,63);
+    padding: 0.5em 1em;
+    margin: 0 -1em;
+    margin-bottom: 2em
+}
+
+.nav a{
+    color: #fff;
+    font-size: 1.3em;
+    font-weight: 200
+}
+
+h4 {
+    padding: 1em 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.5em
+}
+
+.nav a:hover{
+    background-color: rgba(255,255,255,0.2)
+}
+
+.container{
+    padding-bottom: 2em;
+}

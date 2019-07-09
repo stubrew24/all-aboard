@@ -18,5 +18,6 @@ export const ProgressSchema = new Schema({
     complete: {
         type: Boolean,
         default: false
-    }
+    },
+    task: { type: Schema.Types.ObjectId, ref: 'Task' }
 })

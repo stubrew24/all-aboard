@@ -5,18 +5,21 @@ const bodyParser = require('body-parser')
 const userRoutes = require('./src/routes/userRoutes')
 const progressRoutes = require('./src/routes/progressRoutes')
 const tasksRoutes = require('./src/routes/tasksRoutes')
+const publicRoutes = require('./src/routes/publicRoutes')
 const helmet = require('helmet')
 const cors = require('cors')
+const session = require('express-session')
+const { loginRequired } = require('./src/controllers/adminController')
 
 const app = express()
 const port = process.env.now ? 8080 : 4000;
-
-console.log(userRoutes)
 
 app.use(helmet())
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+app.use(session({'secret': process.env.SECRET, resave: true, saveUninitialized: true}))
+app.use(express.static('public'))
 
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/onboarding", {useNewUrlParser: true})
@@ -27,9 +30,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/onboarding", {u
 userRoutes(app)
 progressRoutes(app)
 tasksRoutes(app)
-
-app.get('/', (req, res) => {
-    res.redirect("https://github.com/stubrew24/onboarding-api")
-})
+publicRoutes(app)
 
 app.listen(port);

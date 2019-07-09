@@ -19,4 +19,9 @@ export const UserSchema = new Schema({
         type: Date,
         required: 'Please enter a start date.'
     },
+    started: {
+        type: Boolean,
+        default: false
+    },
+    progress: [{ type: Schema.Types.ObjectId, ref: 'Progress' }]
 })

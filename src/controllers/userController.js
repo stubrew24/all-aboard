@@ -24,7 +24,7 @@ export const newUser = (req, res) => {
 }
 
 export const showUser = (req, res) => {
-    User.findById({_id: req.params.userId}, (err, user) => {
+    User.findById({_id: req.params.userId}).populate({path: 'progress', select:['complete', 'dueDate'], populate: { path: 'task', select: 'name'}}).exec((err, user) => {
         if (err) {
             res.send(err)
         }

@@ -20,18 +20,20 @@ const loadUserProgress = user_id => {
         .then(displayUserProgress)      
 }
 
-const startUserOnboarding = user => {
+const startUserOnboarding = user =>
     list(TASKS_URL).then(tasks => {
-        tasks.forEach(task => {
-            if(task.active){
-                const dueDate = getDueDate(user.startDate, task.weekDue, task.dayDue)
-                create(PROGRESS_URL, {userId: user._id, taskId: task._id, dueDate})
-            }
+        new Promise(resolve => {
+            tasks.forEach(task => {
+                if(task.active){
+                    const dueDate = getDueDate(user.startDate, task.weekDue, task.dayDue)
+                    create(PROGRESS_URL, {userId: user._id, taskId: task._id, dueDate})
+                }
+            })
+            update(USERS_URL, user._id, {started: true})
+                .then(console.log)
+            resolve()
         })
-        update(USERS_URL, user._id, {started: true})
-            .then(console.log)
     })
-}
 
 const getDueDate = (userStartDate, weekDue, dayDue) => {
     days = ((weekDue-1)*7) + dayDue
@@ -40,19 +42,19 @@ const getDueDate = (userStartDate, weekDue, dayDue) => {
 	return new Date(dueDate)
 }
 
-const sendToSlack = (bodyObject) => {
-    fetch('https://hooks.slack.com/services/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', {
-        method: 'POST',
-        body: JSON.stringify(bodyObject)
-    })
-}
+// const sendToSlack = (bodyObject) => {
+//     fetch('https://hooks.slack.com/services/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', {
+//         method: 'POST',
+//         body: JSON.stringify(bodyObject)
+//     })
+// }
 
 
-const jason = [
-    {
-		text: {
-			type: "mrkdwn",
-			text: "Hello, Assistant to the Regional Manager Dwight! *Michael Scott* wants to know where you'd like to take the Paper Company investors to dinner tonight.\n\n *Please select a restaurant:*"
-		}
-    }
-]
+// const jason = [
+//     {
+// 		text: {
+// 			type: "mrkdwn",
+// 			text: "Hello, Assistant to the Regional Manager Dwight! *Michael Scott* wants to know where you'd like to take the Paper Company investors to dinner tonight.\n\n *Please select a restaurant:*"
+// 		}
+//     }
+// ]

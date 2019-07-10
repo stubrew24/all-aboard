@@ -9,7 +9,6 @@ const publicRoutes = require('./src/routes/publicRoutes')
 const helmet = require('helmet')
 const cors = require('cors')
 const session = require('express-session')
-const { loginRequired } = require('./src/controllers/adminController')
 
 const app = express()
 const port = process.env.now ? 8080 : 4000;

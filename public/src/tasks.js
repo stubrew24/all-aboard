@@ -1,6 +1,44 @@
 const taskForm = document.getElementById('taskForm')
 const tasksTable = document.getElementById('tasksTable')
 
+const deleteListener = (task, row) => e => {
+    var confirm1 = confirm(`Are you sure you want to delete task '${task.name}'`)
+    if(confirm1){
+        var confirm2 = confirm(`x users are currently working on this task. If you continue this will be permanently removed from their schedules.`)
+        if(confirm2){
+            remove(TASKS_URL, task._id)
+            row.remove()
+        }
+    }
+}
+
+const updateListener = task => e => {
+    taskForm.dataset.id = task._id
+    taskForm.formtype.value = "update"
+    updateForm(task)
+    showOne('displayTaskForm')
+}
+
+const activeListener = (task, activebtn) => e => {
+    if (activebtn.className == 'active'){
+        update(TASKS_URL, task._id, {active: false})
+        activebtn.className = 'inactive'
+    } else if (activebtn.className == 'inactive'){
+        update(TASKS_URL, task._id, {active: true})
+        activebtn.className = 'active'
+    }
+}
+
+const addTaskListeners = (task, row) => {
+    const delbtn = row.querySelector('.delbtn')
+    delbtn.addEventListener('click', deleteListener(task, row))
+
+    const editbtn = row.querySelector('.editbtn')
+    editbtn.addEventListener('click', updateListener(task))
+    
+    const activebtn = row.querySelector('#activebtn')
+    activebtn.addEventListener('click', activeListener(task, activebtn))
+}
 
 const addTaskToRow = (task) => {
     const taskRow = document.createElement('tr')
@@ -10,44 +48,15 @@ const addTaskToRow = (task) => {
     <td>${task.name}</td>
     <td>${task.description}</td>
     <td>${task.link}</td>
-    <td>${task.dayDue}</td>
     <td>${task.weekDue}</td>
+    <td>${task.dayDue}</td>
     <td>${task.active ? '<div id="activebtn" class="active"></div>' : '<div id="activebtn" class="inactive"></div>'}</td>
     <td>
         <button class='btn btn-sm btn-warning editbtn'>Update</button>
         <button class='btn btn-sm btn-danger delbtn'>Delete</button>
     </td>
     `
-    const delbtn = taskRow.querySelector('.delbtn')
-    delbtn.addEventListener('click', () => {
-        var confirm1 = confirm(`Are you sure you want to delete task '${task.name}'`)
-        if(confirm1){
-            var confirm2 = confirm(`x users are currently working on this task. If you continue this will be permanently removed from their schedules.`)
-            if(confirm2){
-                remove(TASKS_URL, task._id)
-                taskRow.remove()
-            }
-        }
-    })
-    const editbtn = taskRow.querySelector('.editbtn')
-    editbtn.addEventListener('click', () => {
-        taskForm.dataset.id = task._id
-        taskForm.formtype.value = "update"
-        updateForm(task)
-        showOne('displayTaskForm')
-    })
-    
-    const activebtn = taskRow.querySelector('#activebtn')
-    activebtn.addEventListener('click', () => {
-        if (activebtn.className == 'active'){
-            update(TASKS_URL, task._id, {active: false})
-            activebtn.className = 'inactive'
-        } else if (activebtn.className == 'inactive'){
-            update(TASKS_URL, task._id, {active: true})
-            activebtn.className = 'active'
-        }
-    })
-    
+    addTaskListeners(task, taskRow)
     tasksTable.appendChild(taskRow)
 }
 

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Literata:600&display=swap');
 
+
 .active{
     width: 32px;
     height: 32px;
@@ -24,14 +25,13 @@
 .nav{
     background-color: rgb(53,58,63);
     padding: 0.5em 1em;
-    margin: 0 -1em;
-    margin-bottom: 2em
+    margin-bottom: 2em;
 }
 
 .nav a{
     color: #fff;
     font-size: 1.3em;
-    font-weight: 200
+    font-weight: 200;
 }
 
 h4 {
@@ -39,13 +39,19 @@ h4 {
     text-transform: uppercase;
     font-weight: 700;
     text-align: center;
-    font-size: 1.5em
+    font-size: 1.5em;
 }
 
 .nav a:hover{
-    background-color: rgba(255,255,255,0.2)
+    background-color: rgba(255,255,255,0.2);
 }
 
 .container{
     padding-bottom: 2em;
+}
+
+.title-card{
+    font-family: 'Literata', sans-serif;
+    color: rgb(53,58,63);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
 }

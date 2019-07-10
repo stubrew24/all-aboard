@@ -2,6 +2,7 @@ const progressList = document.getElementById('progressList')
 const addUserForm = document.getElementById('addUserForm')
 
 const hideAll = () => {
+    document.querySelector('.hero-img').style.display = "none"
     document.querySelectorAll('.sections').forEach(section => section.style.display = "none")
 }
 
@@ -14,17 +15,11 @@ const showOne = (section) => {
     document.getElementById(section).style.display = "block"
 }
 
-// const displayItem = (item, list) => {
-//     itemEl = document.createElement('li')
-//     itemEl.id = item._id
-//     itemEl.innerText = item.name || item.firstName || item._id
-//     list.appendChild(itemEl)
-// }
-
-// const displayAllItems = (items, list) => {
-//     items.forEach(item => displayItem(item, list))
-// }
-
+const resetForms = (formId) => {
+    document.getElementById(formId).dataset.id = null
+    document.getElementById(formId).formtype.value = ''
+    document.getElementById(formId).reset()
+}
 
 
 const initialize = () => {

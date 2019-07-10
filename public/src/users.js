@@ -1,8 +1,44 @@
 const userForm = document.getElementById('userForm')
 const usersTable = document.getElementById('usersTable')
 
-const addUserToRow = (user) => {
-    userRow = document.createElement('tr')
+const userDeleteListener = (user, row) => e => {
+    var confirm1 = confirm(`Are you sure you want to delete user '${user.firstName + ' ' + user.lastName}'`)
+    if(confirm1){
+        var confirm2 = confirm(`x users are currently working on this task. If you continue this will be permanently removed from their schedules.`)
+        if(confirm2){
+            remove(USERS_URL, user._id)
+            row.remove()
+        }
+    }
+}
+
+const userUpdateListener = user => e => {
+    userForm.dataset.id = user._id
+    userForm.formtype.value = "update"
+    updateUserForm(user)
+    showOne('displayUserForm')
+}
+
+const progressListener = (user) => e => {
+    loadUserProgress(user._id)
+    showOne('displayUserProgress')
+}
+
+const userListeners = (user, row) => {
+    const delbtn = row.querySelector('.delbtn')
+    delbtn.addEventListener('click', userDeleteListener(user, row))
+
+    const editbtn = row.querySelector('.editbtn')
+    editbtn.addEventListener('click', userUpdateListener(user))
+
+    if (row.querySelector('.progressBtn')){
+        const progressBtn = row.querySelector('.progressBtn')
+        progressBtn.addEventListener('click', progressListener(user))
+    }
+}
+
+const addUserToRow = async (user) => {
+    const userRow = document.createElement('tr')
     userRow.id = user._id
     userRow.innerHTML = `
         <td>${user.firstName}</td>
@@ -17,37 +53,21 @@ const addUserToRow = (user) => {
             ${user.started ? '<button class="btn btn-sm btn-info btn-block progressBtn">View Progress</button>' : '<button class="btn btn-sm btn-success btn-block onboardingBtn">Start Onboarding</button>'}
         </td>
     `
-    const delbtn = userRow.querySelector('.delbtn')
-    delbtn.addEventListener('click', () => {
-        var confirm1 = confirm(`Are you sure you want to delete user '${user.firstName + ' ' + user.lastName}'`)
-        if(confirm1){
-            var confirm2 = confirm(`x users are currently working on this task. If you continue this will be permanently removed from their schedules.`)
-            if(confirm2){
-                remove(USERS_URL, user._id)
-                userRow.remove()
-            }
-        }
-    })
-    const editbtn = userRow.querySelector('.editbtn')
-    editbtn.addEventListener('click', () => {
-        userForm.dataset.id = user._id
-        userForm.formtype.value = "update"
-        updateUserForm(user)
-        showOne('displayUserForm')
-    })
+    userListeners(user, userRow)
 
-    if (userRow.querySelector('.progressBtn')){
-        const progressBtn = userRow.querySelector('.progressBtn')
-        progressBtn.addEventListener('click', () => {
-            loadUserProgress(user._id)
-            showOne('displayUserProgress')
-        })
-    }
+    if (userRow.querySelector('.onboardingBtn')) {
 
-    if (userRow.querySelector('.onboardingBtn')){
         const onboardingBtn = userRow.querySelector('.onboardingBtn')
+        
         onboardingBtn.addEventListener('click', () => {
             startUserOnboarding(user)
+            
+            setTimeout(() => {
+                list(USERS_URL)
+                    .then(addUserRowsToTable)
+                loadUserProgress(user._id)
+                showOne('displayUserProgress')
+            }, 100)
         })
     }
 
@@ -55,6 +75,7 @@ const addUserToRow = (user) => {
 }
 
 const addUserRowsToTable = (users) => {
+    usersTable.innerHTML = ''
     users.forEach(addUserToRow)
 }
 

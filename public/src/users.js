@@ -120,9 +120,11 @@ const createUser = () => {
     create(USERS_URL, newUser)
         .then(resp => {
             if (resp.error){
+                console.log('error')
                 alert.style.display = "block"
                 alert.innerText = "User could not be saved: Email address already taked."
             } else {
+                console.log('hmm')
                 addUserToRow(resp)
                 userForm.reset()
                 showOne('displayUsers')

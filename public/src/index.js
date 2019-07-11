@@ -24,10 +24,10 @@ const showOneUpdate = (section) => {
 
 const resetForms = () => {
     document.getElementById('taskForm').dataset.id = null
-    document.getElementById('taskForm').formtype.value = ''
+    document.getElementById('taskForm').formtype.value = 'new'
     document.getElementById('taskForm').reset()
     document.getElementById('userForm').dataset.id = null
-    document.getElementById('userForm').formtype.value = ''
+    document.getElementById('userForm').formtype.value = 'new'
     document.getElementById('userForm').reset()
 
     document.getElementById('displayTaskForm').querySelector('h4').innerText = "Add Task"

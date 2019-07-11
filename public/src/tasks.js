@@ -19,7 +19,7 @@ const updateListener = task => e => {
     document.getElementById('displayTaskForm').querySelector('h4').innerText = "Update Task"
     document.getElementById('displayTaskForm').querySelector('.taskSubmit').value = "Update Task"
     updateForm(task)
-    showOne('displayTaskForm')
+    showOneUpdate('displayTaskForm')
 }
 
 const activeListener = (task, activebtn) => e => {

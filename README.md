@@ -1,4 +1,6 @@
-# Onboarding API
+# All Aboard
+
+Automated staff onboarding.
 
 ## Built With
 

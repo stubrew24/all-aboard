@@ -5,7 +5,6 @@ export const home = (req, res) => {
 }
 
 export const loggedin = (req, res) => {
-    console.log(req.session.credentials)
     res.send('You are logged in')
 }
 

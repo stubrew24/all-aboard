@@ -1,5 +1,6 @@
 const userForm = document.getElementById('userForm')
 const usersTable = document.getElementById('usersTable')
+const alert = document.querySelector('.alert')
 
 const userDeleteListener = (user, row) => e => {
     var confirm1 = confirm(`Are you sure you want to delete user '${user.firstName + ' ' + user.lastName}'`)
@@ -15,8 +16,10 @@ const userDeleteListener = (user, row) => e => {
 const userUpdateListener = user => e => {
     userForm.dataset.id = user._id
     userForm.formtype.value = "update"
+    document.getElementById('displayUserForm').querySelector('h4').innerText = "Update User"
+    document.getElementById('displayUserForm').querySelector('.userSubmit').value = "Update User"
     updateUserForm(user)
-    showOne('displayUserForm')
+    showOneUpdate('displayUserForm')
 }
 
 const progressListener = (user) => e => {
@@ -94,9 +97,9 @@ const updateUser = () => {
         email: userForm.email.value,
         startDate: userForm.startDate.value
     }
-    console.log(updateduser)
     update(USERS_URL, userId, updateduser)
         .then(updateUserRow)
+    userForm.reset()
 }
 
 const updateUserRow = (user) => {
@@ -115,9 +118,16 @@ const createUser = () => {
         startDate: userForm.startDate.value
     }
     create(USERS_URL, newUser)
-        .then(addUserToRow)
-    userForm.reset()
-    showOne('displayUsers')
+        .then(resp => {
+            if (resp.error){
+                alert.style.display = "block"
+                alert.innerText = "User could not be saved: Email address already taked."
+            } else {
+                addUserToRow(resp)
+                userForm.reset()
+                showOne('displayUsers')
+            }
+        })
 }
 
 userFormSubmit = () => {
@@ -128,6 +138,5 @@ userFormSubmit = () => {
         } else if (userForm.formtype.value == 'update'){
             updateUser()
         }
-        userForm.reset()
     })
 }

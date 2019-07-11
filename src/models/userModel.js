@@ -13,7 +13,8 @@ export const UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: 'Please enter an email address.'
+        required: 'Please enter an email address.',
+        unique: true
     },
     startDate: {
         type: Date,

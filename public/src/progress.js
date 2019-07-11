@@ -30,7 +30,6 @@ const startUserOnboarding = user =>
                 }
             })
             update(USERS_URL, user._id, {started: true})
-                .then(console.log)
             resolve()
         })
     })

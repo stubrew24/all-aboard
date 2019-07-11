@@ -33,12 +33,14 @@
             </li>
         </ul>
 
+        <div class="alert alert-danger" role="alert" style="display: none;"></div>
+
         <div class="card bg-dark text-white hero-img">
-                <img src="resources/aboard.jpg" class="card-img" alt="Responsive image" />
-                <div class="card-img-overlay">
-                    <h1 class="card-title display-3 title-card text-right">All Aboard</h1>
-                    <h5 class="card-text title-card text-right">Automated staff onboarding.</h5>
-                </div>
+            <img src="resources/aboard.jpg" class="card-img" alt="Responsive image" />
+            <div class="card-img-overlay">
+                <h1 class="card-title display-3 title-card text-right">All Aboard</h1>
+                <h5 class="card-text title-card text-right">Automated staff onboarding.</h5>
+            </div>
         </div>
 
         <div id="displayTasks" class="sections" style="display: none">
@@ -87,7 +89,7 @@
                         <label for="startDate">Start Date</label>
                         <input type="date" name="startDate" class="form-control" placeholder="Start Date" required /><br />
 
-                        <input type="submit" name="submit" value="Add User" class="btn btn-sm btn-info" />
+                        <input type="submit" name="submit" value="Add User" class="btn btn-sm btn-info userSubmit" />
                     </form>
                 </div>
                 <div class="col"></div>
@@ -108,7 +110,7 @@
                         <input type="number" name="dayDue" class="form-control" placeholder="Day Due" required /><br />
                         <input type="number" name="weekDue" class="form-control" placeholder="Week Due" required /><br />
 
-                        <input type="submit" name="submit" value="Add Task" class="btn btn-sm btn-info" />
+                        <input type="submit" name="submit" value="Add Task" class="btn btn-sm btn-info taskSubmit" />
                     </form>
                 </div>
                 <div class="col"></div>

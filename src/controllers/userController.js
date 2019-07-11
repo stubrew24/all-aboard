@@ -19,7 +19,7 @@ export const newUser = (req, res) => {
 
     newUser.save((err, user) => {
         if (err) {
-            res.send(err)
+            res.json({error: err})
         }
         res.json(user)
     })

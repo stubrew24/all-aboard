@@ -15,6 +15,9 @@ const deleteListener = (task, row) => e => {
 const updateListener = task => e => {
     taskForm.dataset.id = task._id
     taskForm.formtype.value = "update"
+
+    document.getElementById('displayTaskForm').querySelector('h4').innerText = "Update Task"
+    document.getElementById('displayTaskForm').querySelector('.taskSubmit').value = "Update Task"
     updateForm(task)
     showOne('displayTaskForm')
 }

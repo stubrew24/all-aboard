@@ -72,7 +72,9 @@ const userTasks = userId => {
                         return progress
                     }
                 })
-                mailerTemplate(user.email, outstanding)
+                if (outstanding.length > 0){
+                    mailerTemplate(user.email, outstanding)
+                }
             }
         })
 }
@@ -87,7 +89,7 @@ export const dailyMessages = () => {
     })
 }
 
-cron.schedule("43 14 * * 3", () => {
+cron.schedule("20 15 * * 4", () => {
     console.log("Cron running")
     dailyMessages()
 })
